@@ -5,7 +5,14 @@
 Maybe you'd like to visit http://47.94.165.69:4004/
 
 
-hahahahahahhahh
+---
 
+## Git Commands List as Follows
 
-test
+- git init
+
+- git add .
+
+- git commit -t 'test comments'
+
+- git push
