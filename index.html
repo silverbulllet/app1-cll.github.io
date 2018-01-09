@@ -12,12 +12,12 @@
 
 <script type="text/javascript">
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').then(function(registration) {
-    // Registration was successful
-    console.log('Service Worker registered successful with scope: ',registration.scope);
-  }).catch(function(err) {
-    // registration failed :(
-    console.log('Service Worker registered failed: ', err);
-  });
+	navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    	// success
+    	console.log('Service Worker registered successful with scope: ',registration.scope);
+  	}).catch(function(err) {
+    	// failure
+    	console.log('Service Worker registration failed: ', err);
+  	});
 }
 </script>
