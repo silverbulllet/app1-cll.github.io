@@ -8,3 +8,16 @@
      May you would prefer visit <a href="http://47.94.165.69:4004/">Tannhäuser Gate</a>.
   </body>
 </html>
+
+
+<script type="text/javascript">
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    // Registration was successful
+    console.log('Service Worker registered successful with scope: ',registration.scope);
+  }).catch(function(err) {
+    // registration failed :(
+    console.log('Service Worker registered failed: ', err);
+  });
+}
+</script>
