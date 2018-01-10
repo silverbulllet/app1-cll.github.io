@@ -10,7 +10,7 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', function(event) {
-	console.log('install...', { event })
+  console.log('install...', { event })
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -24,9 +24,8 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-	console.log('fetching...', { event })
+  console.log('fetching...', { event })
   event.respondWith(
-  	console.log('-- fetch in event.respondWith --')
     caches.match(event.request)
       .then(function(response) {
         // Cache hit - return response
