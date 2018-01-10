@@ -22,7 +22,6 @@ self.addEventListener('install', function(event) {
 });
 
 
-
 self.addEventListener('fetch', function(event) {
   console.log('fetching...', { event })
   event.respondWith(
@@ -30,11 +29,25 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-          console.log('Cache hit!!!!', { response })
+          console.warn('Cache hit !!', { response })
           return response;
         }
-        console.log('Cache not hit .. ', { request: event.request });
-        return fetch(event.request);
+
+        var fetchRequest = event.request.clone();
+        console.log('Cache not hit .. ', { fetchRequest });
+
+        return fetch(fetchRequest).then(function(response){
+        	if(!response || response.status !== 200 || response.type !== 'basic') return response;
+
+        	var responseToCache = response.clone();
+
+        	caches.open(CACHE_NAME)
+        		.then(function(cache){
+        			cache.put(event.request, responseToCache);
+        		});
+
+        	return response;
+        });
       }
     )
   );
