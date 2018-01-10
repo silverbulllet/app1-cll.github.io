@@ -1,6 +1,5 @@
 //sw.js
-
-console.log(' in sw.js ');
+//console.log('in /sw.js ');
 
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
@@ -10,7 +9,7 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', function(event) {
-  console.log('install...', { event })
+  console.log('--- service worker installing ---', { event })
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -23,21 +22,21 @@ self.addEventListener('install', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
-  console.log('fetching...', { event })
+  console.log('--- service worker fetching --- ', { event })
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-          console.warn('Cache hit !!', { response })
+          console.warn('Cache hit ✔️', { response })
           return response;
         }
 
         var fetchRequest = event.request.clone();
-        console.log('Cache not hit 💔 ', { fetchRequest });
+        console.warn('Cache not hit 💔 ', { fetchRequest });
 
         return fetch(fetchRequest).then(function(response){
-        	console.log('returning a fetch...', { response })
+        	console.log('returning response of the fetch...', { response })
 
         	if(!response || response.status !== 200 || response.type !== 'basic') 
         		return response;
@@ -54,5 +53,24 @@ self.addEventListener('fetch', function(event) {
         });
       }
     )
+  );
+});
+
+
+self.addEventListener('activate', function(event) {
+  console.log('--- service worker activate --- ');
+
+  var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
   );
 });
