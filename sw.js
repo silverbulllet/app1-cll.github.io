@@ -10,6 +10,7 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', function(event) {
+	console.log('install...', { event })
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -20,6 +21,20 @@ self.addEventListener('install', function(event) {
   );
 });
 
+
+
 self.addEventListener('fetch', function(event) {
-	console.log('fetch...', { event })
+	console.log('fetching...', { event })
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+        	console.log('Cache hit!!!!', { response })
+        	return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
 });
