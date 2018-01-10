@@ -34,15 +34,19 @@ self.addEventListener('fetch', function(event) {
         }
 
         var fetchRequest = event.request.clone();
-        console.log('Cache not hit .. ', { fetchRequest });
+        console.log('Cache not hit 💔 ', { fetchRequest });
 
         return fetch(fetchRequest).then(function(response){
-        	if(!response || response.status !== 200 || response.type !== 'basic') return response;
+        	console.log('returning a fetch...', { response })
+
+        	if(!response || response.status !== 200 || response.type !== 'basic') 
+        		return response;
 
         	var responseToCache = response.clone();
 
         	caches.open(CACHE_NAME)
         		.then(function(cache){
+        			console.log('caching new request...', { fetchRequest, responseToCache });
         			cache.put(event.request, responseToCache);
         		});
 
