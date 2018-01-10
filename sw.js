@@ -4,10 +4,10 @@ console.log(' in sw.js ');
 
 
 self.addEventListener('install', function(event) {
-	console.log('installing...')
+	console.log('installing...', { event })
 });
 
 
 self.addEventListener('fetch', function(event) {
-	console.log('fetch...')
+	console.log('fetch...', { event })
 });
