@@ -14,7 +14,7 @@
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/sw.js').then(function(registration) {
     	// success
-    	console.log('Service Worker registered successful with scope: ',registration.scope);
+    	console.log('Service Worker registered successfully!',{ registration });
   	}).catch(function(err) {
     	// failure
     	console.log('Service Worker registration failed: ', err);
