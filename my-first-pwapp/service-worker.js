@@ -1,5 +1,23 @@
 var cacheName = 'my-first-pwapp-weatherPWA-v1';
-var filesToCache = [];
+var filesToCache = [
+  '/',
+  '/index.html',
+  '/scripts/app.js',
+  '/styles/inline.css',
+  '/images/clear.png',
+  '/images/cloudy-scattered-showers.png',
+  '/images/cloudy.png',
+  '/images/fog.png',
+  '/images/ic_add_white_24px.svg',
+  '/images/ic_refresh_white_24px.svg',
+  '/images/partly-cloudy.png',
+  '/images/rain.png',
+  '/images/scattered-showers.png',
+  '/images/sleet.png',
+  '/images/snow.png',
+  '/images/thunderstorm.png',
+  '/images/wind.png'
+];
 
 self.addEventListener('install', function(e) {
   console.log('[ServiceWorker] Install');
@@ -14,4 +32,17 @@ self.addEventListener('install', function(e) {
 // The activate event is fired when the service worker starts up.
 self.addEventListener('activate', function(e) {
   console.log('[ServiceWorker] Activate');
+  e.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (key !== cacheName) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  // When the app is complete, 
+  // self.clients.claim() fixes a corner case in which the app wasn't returning the latest data.
+  return self.clients.claim();
 });
