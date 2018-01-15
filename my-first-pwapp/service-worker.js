@@ -48,3 +48,15 @@ self.addEventListener('activate', function(e) {
   // in which the app wasn't returning the latest data.
   return self.clients.claim();
 });
+
+
+// intercept requests made from our Progressive Web App 
+// and handle them within the service worker. 
+self.addEventListener('fetch', function(e) {
+  console.log('[ServiceWorker] Fetch', e.request.url);
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+    })
+  );
+});
