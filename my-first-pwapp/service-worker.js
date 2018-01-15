@@ -1,22 +1,23 @@
 var cacheName = 'my-first-pwapp-weatherPWA-v1';
+
 var filesToCache = [
-  '/',
-  '/index.html',
-  '/scripts/app.js',
-  '/styles/inline.css',
-  '/images/clear.png',
-  '/images/cloudy-scattered-showers.png',
-  '/images/cloudy.png',
-  '/images/fog.png',
-  '/images/ic_add_white_24px.svg',
-  '/images/ic_refresh_white_24px.svg',
-  '/images/partly-cloudy.png',
-  '/images/rain.png',
-  '/images/scattered-showers.png',
-  '/images/sleet.png',
-  '/images/snow.png',
-  '/images/thunderstorm.png',
-  '/images/wind.png'
+  '/my-first-pwapp/',
+  '/my-first-pwapp/index.html',
+  '/my-first-pwapp/scripts/app.js',
+  '/my-first-pwapp/styles/inline.css',
+  '/my-first-pwapp/images/clear.png',
+  '/my-first-pwapp/images/cloudy-scattered-showers.png',
+  '/my-first-pwapp/images/cloudy.png',
+  '/my-first-pwapp/images/fog.png',
+  '/my-first-pwapp/images/ic_add_white_24px.svg',
+  '/my-first-pwapp/images/ic_refresh_white_24px.svg',
+  '/my-first-pwapp/images/partly-cloudy.png',
+  '/my-first-pwapp/images/rain.png',
+  '/my-first-pwapp/images/scattered-showers.png',
+  '/my-first-pwapp/images/sleet.png',
+  '/my-first-pwapp/images/snow.png',
+  '/my-first-pwapp/images/thunderstorm.png',
+  '/my-first-pwapp/images/wind.png'
 ];
 
 self.addEventListener('install', function(e) {
@@ -43,6 +44,7 @@ self.addEventListener('activate', function(e) {
     })
   );
   // When the app is complete, 
-  // self.clients.claim() fixes a corner case in which the app wasn't returning the latest data.
+  // self.clients.claim() fixes a corner case 
+  // in which the app wasn't returning the latest data.
   return self.clients.claim();
 });
