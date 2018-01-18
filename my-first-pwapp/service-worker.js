@@ -1,4 +1,6 @@
-var cacheName = 'my-first-pwapp-weatherPWA-v1';
+var dataCacheName = 'weatherData-v1';
+
+var cacheName = 'my-first-pwapp-assets-v1';
 
 var filesToCache = [
   '/my-first-pwapp/',
@@ -19,6 +21,7 @@ var filesToCache = [
   '/my-first-pwapp/images/thunderstorm.png',
   '/my-first-pwapp/images/wind.png'
 ];
+
 
 self.addEventListener('install', function(e) {
   console.log('[ServiceWorker] Install');
@@ -53,10 +56,34 @@ self.addEventListener('activate', function(e) {
 // intercept requests made from our Progressive Web App 
 // and handle them within the service worker. 
 self.addEventListener('fetch', function(e) {
-  console.log('[ServiceWorker] Fetch', e.request.url);
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+  console.log('[Service Worker] Fetch', e.request.url);
+  var dataUrl = 'https://query.yahooapis.com/v1/public/yql';
+  if (e.request.url.indexOf(dataUrl) > -1) {
+    /*
+     * When the request URL contains dataUrl, the app is asking for fresh
+     * weather data. In this case, the service worker always goes to the
+     * network and then caches the response. This is called the "Cache then
+     * network" strategy:
+     * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network
+     */
+    e.respondWith(
+      caches.open(dataCacheName).then(function(cache) {
+        return fetch(e.request).then(function(response){
+          cache.put(e.request.url, response.clone());
+          return response;
+        });
+      })
+    );
+  } else {
+    /*
+     * The app is asking for app shell files. In this scenario the app uses the
+     * "Cache, falling back to the network" offline strategy:
+     * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
+     */
+    e.respondWith(
+      caches.match(e.request).then(function(response) {
+        return response || fetch(e.request);
+      })
+    );
+  }
 });
