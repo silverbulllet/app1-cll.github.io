@@ -1,0 +1,28 @@
+/*
+* PostPagination
+*/
+._3JfpYj6yks-LM5BZbILjeX{
+  padding: 0;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+._3JfpYj6yks-LM5BZbILjeX > li{
+  display:  inline-block;
+  font-size: 14px;
+}
+
+._3JfpYj6yks-LM5BZbILjeX > li:last-child{
+  float: right;
+}
+
+/*.pagination > i > a {
+  color: #666;
+}
+
+.pagination > li > a:hover{
+  color: #0085a1;
+}
+*/
+
+/*# sourceMappingURL=styles.chunk.css.map*/
