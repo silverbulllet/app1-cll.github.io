@@ -1,16 +1,20 @@
-# README of silverbulllet.github.io
+# README
 
-Maybe you'd like to visit http://47.94.165.69:4004/
+Maybe you'd like to visit http://chenleileicode.com
 
 
 ### Git Commands
 
 ```
-- git init
+- npm run export
+
+- rm -rf .github.io/*.html .github.io/_next/ .github.io/static/
+
+- cp -rf out/* .github.io/
 
 - git add .
 
-- git commit -m 'test comments'
+- git commit -m 'update all'
 
 - git push
 
