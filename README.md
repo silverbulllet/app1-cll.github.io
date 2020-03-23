@@ -12,9 +12,12 @@ Maybe you'd like to visit http://chenleileicode.com
 
 - cp -rf out/* .github.io/
 
-- git add .
+```
 
-- git commit -m 'update all'
+```
+- cd .github.io/
+
+- git add . && git commit -m 'update all'
 
 - git push
 
