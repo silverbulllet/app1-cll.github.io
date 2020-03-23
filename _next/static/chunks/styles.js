@@ -1,14 +1,13 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["styles"],{
 
-/***/ "./components/common/Pagination/Pagination.css":
-/*!*****************************************************!*\
-  !*** ./components/common/Pagination/Pagination.css ***!
-  \*****************************************************/
+/***/ "./src/common/components/Pagination/PostPagination.scss":
+/*!**************************************************************!*\
+  !*** ./src/common/components/Pagination/PostPagination.scss ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
-module.exports = {"pagination":"_3JfpYj6yks-LM5BZbILjeX"};;
+// extracted by mini-css-extract-plugin;
     if (true) {
       var injectCss = function injectCss(prev, href) {
         var link = prev.cloneNode();
@@ -30,7 +29,7 @@ module.exports = {"pagination":"_3JfpYj6yks-LM5BZbILjeX"};;
           .querySelectorAll("link[href][rel=stylesheet]")
           .forEach(function(link) {
             if (!link.href.match(prefix) || link.stale) return;
-            injectCss(link, link.href.split("?")[0] + "?unix=1577778927682");
+            injectCss(link, link.href.split("?")[0] + "?unix=1584935462393");
           });
       }
     }
